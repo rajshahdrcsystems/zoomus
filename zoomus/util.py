@@ -260,7 +260,8 @@ def date_to_str(d):
 
 
 def generate_token(oauth_uri, key, secret, account_id):
-    base64_auth_string = base64.b64encode(f"{key}:{secret}".encode("ascii")).decode(
+    key_data = "{}:{}".format(key, secret)
+    base64_auth_string = base64.b64encode(key_data.encode("ascii")).decode(
         "ascii"
     )
 
@@ -271,7 +272,7 @@ def generate_token(oauth_uri, key, secret, account_id):
     }
     # Define the headers
     headers = {
-        "Authorization": f"Basic {base64_auth_string}",
+        "Authorization": "Basic {}".format(base64_auth_string),
     }
 
     # Make the request
